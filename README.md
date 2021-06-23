@@ -1,8 +1,8 @@
 ## Setup
 
 Install dependencies:
-    
-    nvm use # Should install node 10.16.0
+
+    nvm use # Should install node 10.22.0
     npm install -g ganache-cli
     npm install
 
@@ -15,8 +15,10 @@ Run Ganache:
 Any time you shutdown ganache, you will need to do `zos push` and `zos create` to deploy the project into the blank blockchain.
 
     npx zos session --network local --from 0x1df62f291b2e969fb0849d99d9ce41e2f137006e --expires 3600
-    zos push
-    zos create XPoap --init initialize --args '"Poap","POAP","https://poap.xyz",[]'
+    // npx zos link openzeppelin-eth // Can't link it as it does not exists
+    npx zos add Poap
+    npx zos push
+    npx zos create Poap --init initialize --args '"Poap","POAP","https://poap.xyz",[]'
 
 ### Truffle Commands
 

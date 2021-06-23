@@ -1,3 +1,7 @@
+#env
+.env
+.envrc
+
 # zos sessions
 zos.dev-*
 
@@ -12,3 +16,4 @@ node_modules
 
 # IDEs
 .idea/
+.DS_STORE
