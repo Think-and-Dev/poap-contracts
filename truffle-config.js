@@ -144,5 +144,8 @@ module.exports = {
         }
       }
     }
-  }
+  },
+  plugins: [
+    'truffle-plugin-blockscout-verify'
+  ],
 };
