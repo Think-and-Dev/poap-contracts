@@ -1,8 +1,8 @@
 ## Setup
 
 Install dependencies:
-    
-    nvm use # Should install node 10.16.0
+
+    nvm use # Should install node 10.22.0
     npm install -g ganache-cli
     npm install
 
@@ -15,8 +15,10 @@ Run Ganache:
 Any time you shutdown ganache, you will need to do `zos push` and `zos create` to deploy the project into the blank blockchain.
 
     npx zos session --network local --from 0x1df62f291b2e969fb0849d99d9ce41e2f137006e --expires 3600
-    zos push
-    zos create XPoap --init initialize --args '"Poap","POAP","https://poap.xyz",[]'
+    // npx zos link openzeppelin-eth // Can't link it as it does not exists
+    npx zos add Poap
+    npx zos push
+    npx zos create Poap --init initialize --args '"Poap","POAP","https://poap.xyz",[]'
 
 ### Truffle Commands
 
@@ -67,10 +69,15 @@ To create an instance we do:
 
 ### Contract addresses ###
 #### Production ####
-* Mainnet: [0x22c1f6050e56d2876009903609a2cc3fef83b415](https://etherscan.io/address/0x22c1f6050e56d2876009903609a2cc3fef83b415)
+* Ethereum: [0x22c1f6050e56d2876009903609a2cc3fef83b415](https://etherscan.io/address/0x22c1f6050e56d2876009903609a2cc3fef83b415)
 * xDAI: [0x22c1f6050e56d2876009903609a2cc3fef83b415](https://blockscout.com/poa/xdai/address/0x22c1f6050e56d2876009903609a2cc3fef83b415/transactions)
 
 #### Development ####
 * Rinkeby: []()
 * Sokol: [0x22c1f6050e56d2876009903609a2cc3fef83b415](https://blockscout.com/poa/sokol/address/0x22c1f6050e56d2876009903609a2cc3fef83b415/transactions)
 * Binance Smart Chain: [0xe310633E107e87F8Dfe50b00C360be60e926A1d6](https://testnet.bscscan.com/address/0xe310633e107e87f8dfe50b00c360be60e926a1d6)
+* Alfajores Celo Testnet Proxy: [0xdfc5ad68A2e7b7e453db3b48300A522bbcC2b43d](https://alfajores-blockscout.celo-testnet.org/address/0xdfc5ad68A2e7b7e453db3b48300A522bbcC2b43d/transactions)
+Implementation 0x9F5E9492e8A34Fb3F95D79283eF44f1df049b916
+ProxyAdmin 0x997d3AF5B3562D80d04EF8D02Ea5E107A3b13e42
+
+Plugin to verify on Celo Blockscout is not working https://github.com/celo-org/truffle-plugin-blockscout-verify

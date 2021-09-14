@@ -1,4 +1,21 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
+const ContractKit = require('@celo/contractkit');
+const Web3 = require('web3');
+
+require('dotenv').config({path: '.env'});
+
+// Create connection to DataHub Celo Network node
+// https://learn.figment.io/network-documentation/celo/tutorial/deploying-smart-contracts-on-celo-with-truffle
+const web3 = new Web3(process.env.POAP_CELO_TEST_URL);
+
+const client = ContractKit.newKitFromWeb3(web3);
+
+// Initialize account from our private key
+const account = web3.eth.accounts.privateKeyToAccount(process.env.POAP_CELO_TEST_PK);
+
+// We need to add private key to ContractKit in order to sign transactions
+client.addAccount(account.privateKey);
+
 
 module.exports = {
   networks: {
@@ -99,5 +116,36 @@ module.exports = {
       gasPrice: 5e9,
       network_id: 97,
     },
+    celotestnet: {
+      provider: function() {
+        if (!process.env.POAP_CELO_TEST_PK) {
+          console.error('POAP_CELO_TEST_PK env variable is needed');
+          process.abort();
+        }
+        if (!process.env.POAP_CELO_TEST_URL) {
+          console.error('POAP_CELO_TEST_URL env variable is needed');
+          process.abort();
+        }
+        return client.connection.web3.currentProvider; // CeloProvider
+      },
+      gas: 5000000,
+      gasPrice: 6e9,
+      network_id: 44787  // latest Alfajores network id
+    },
   },
+  compilers: {
+    solc: {
+      version: '0.5.17',
+      settings: {
+        evmVersion: "istanbul",
+        optimizer: {
+          enabled: true,
+          runs: 200
+        }
+      }
+    }
+  },
+  plugins: [
+    'truffle-plugin-blockscout-verify'
+  ],
 };
